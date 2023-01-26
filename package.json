@@ -5,9 +5,15 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "start": "node dist/index.js",
-        "dev: migration run": "npx prisma migrate dev --name migration",
-        "dev": "nodemon src/index.ts",
+        "build": "tsc",
+        "start": "tsc && node dist/index.js",
+        
+        "dev:load-envs": "dotenv -e .env.dev",
+        "dev:migration:generate": "npm run dev:load-envs prisma generate",
+        "dev:migration:run": "npm run dev:load-envs prisma migrate dev",
+        "dev": "NODE_ENV=dev nodemon ./src/index.ts",
+
+
         "test": "echo \"Error: no test specified\" && exit 1",
         "prettier": "npx prettier --write .",
         "lint": "npm run prettier && eslint . --ext .ts"
@@ -40,6 +46,8 @@
     },
     "dependencies": {
         "cors": "^2.8.5",
-        "dotenv": "^16.0.3"
+        "dotenv": "^16.0.3",
+        "dotenv-cli": "^7.0.0",
+        "dotenv-expand": "^10.0.0"
     }
 }
