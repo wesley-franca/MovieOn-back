@@ -10,9 +10,9 @@
         
         "dev:load-envs": "dotenv -e .env.dev",
         "dev:migration:generate": "npm run dev:load-envs prisma generate",
-        "dev:migration:run": "npm run dev:load-envs prisma migrate dev",
+        "dev:migration:run": "npm run dev:load-envs prisma migrate dev --name migration",
+        "dev:seed": "npm run dev:load-envs prisma db seed",
         "dev": "NODE_ENV=dev nodemon ./src/index.ts",
-
 
         "test": "echo \"Error: no test specified\" && exit 1",
         "prettier": "npx prettier --write .",
@@ -24,6 +24,9 @@
     },
     "author": "Thepaocomovo",
     "license": "ISC",
+    "prisma": {
+        "seed": "npm run dev:load-envs -- ts-node prisma/seed.ts"
+      },
     "bugs": {
         "url": "https://github.com/Thepaocomovo/MovieOn-back/issues"
     },
