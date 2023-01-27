@@ -1,14 +1,13 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import { loadEnv } from "./config/envs.js";
 
-dotenv.config();
+loadEnv();
 
 const server = express();
 server.use(cors()).use(express.json());
 
 server.get("/", (req, res) => {
-    console.log(process.env.TESTE);
     return res.sendStatus(200);
 });
 

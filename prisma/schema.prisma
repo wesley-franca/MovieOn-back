@@ -51,7 +51,8 @@ model Enrollment {
 model Movie {
   id        Int    @id @default(autoincrement())
   title     String @db.VarChar(255)
-  author    String @db.VarChar(255)
+  director  String @db.VarChar(255)
+  genre     String
   releaseAt String
 
   createdAt DateTime @default(now())
