@@ -6,15 +6,22 @@
     "type": "module",
     "scripts": {
         "build": "tsc",
-        "start": "tsc && node dist/index.js",
-        
+        "migration:generate": "npx prisma generate",
+        "migration:run": "npx prisma migrate deploy",
+        "seed": "npx prisma db seed",
+        "start": "tsc && node dist/src/server.js",
         "dev:load-envs": "dotenv -e .env.dev",
         "dev:migration:generate": "npm run dev:load-envs prisma generate",
         "dev:migration:run": "npm run dev:load-envs prisma migrate dev",
         "dev:seed": "npm run dev:load-envs prisma db seed",
-        "dev": "NODE_ENV=dev nodemon ./src/index.ts",
-
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "NODE_ENV=dev nodemon ./src/server.ts",
+        "test:load-envs": "dotenv -e .env.test",
+        "test:migration:generate": "npm run test:load-envs prisma migrate dev",
+        "test:migration:run": "npm run test:load-envs prisma migrate deploy",
+        "test:seed": "npm run test:load-envs prisma db seed",
+        "test:coverage": "npm run test:load-envs npm run test -- --coverage",
+        "test:watch": "npm run test:load-envs jest --watch --passWithNoTests --runInBand",
+        "test": "npm run test:load-envs npx jest",
         "prettier": "npx prettier --write .",
         "lint": "npm run prettier && eslint . --ext .ts"
     },
@@ -26,24 +33,30 @@
     "license": "ISC",
     "prisma": {
         "seed": "npm run dev:load-envs -- ts-node prisma/seed.ts"
-      },
+    },
     "bugs": {
         "url": "https://github.com/Thepaocomovo/MovieOn-back/issues"
     },
     "homepage": "https://github.com/Thepaocomovo/MovieOn-back#readme",
     "devDependencies": {
+        "@faker-js/faker": "^7.6.0",
         "@prisma/client": "^4.9.0",
         "@types/cors": "^2.8.13",
         "@types/express": "^4.17.15",
+        "@types/jest": "^29.4.0",
         "@types/node": "^18.11.18",
         "@types/pg": "^8.6.6",
+        "@types/supertest": "^2.0.12",
         "@typescript-eslint/eslint-plugin": "^5.49.0",
         "@typescript-eslint/parser": "^5.49.0",
         "eslint": "^8.32.0",
         "express": "^4.18.2",
+        "jest": "^29.4.1",
         "nodemon": "^2.0.20",
         "prettier": "2.8.3",
         "prisma": "^4.9.0",
+        "supertest": "^6.3.3",
+        "ts-jest": "^29.0.5",
         "ts-node": "^10.9.1",
         "typescript": "^4.9.4"
     },
@@ -51,6 +64,7 @@
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
         "dotenv-cli": "^7.0.0",
-        "dotenv-expand": "^10.0.0"
+        "dotenv-expand": "^10.0.0",
+        "http-status": "^1.6.2"
     }
 }
