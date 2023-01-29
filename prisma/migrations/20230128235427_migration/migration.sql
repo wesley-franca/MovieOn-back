@@ -1,16 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `movies` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `users` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "movies";
-
--- DropTable
-DROP TABLE "users";
-
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
@@ -49,10 +36,21 @@ CREATE TABLE "Enrollment" (
 );
 
 -- CreateTable
+CREATE TABLE "MovieGenre" (
+    "id" INTEGER NOT NULL,
+    "name" VARCHAR(20) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "MovieGenre_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Movie" (
     "id" SERIAL NOT NULL,
     "title" VARCHAR(255) NOT NULL,
-    "author" VARCHAR(255) NOT NULL,
+    "director" VARCHAR(255) NOT NULL,
+    "genreId" INTEGER NOT NULL,
     "releaseAt" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -100,6 +98,9 @@ ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "Enrollment" ADD CONSTRAINT "Enrollment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Movie" ADD CONSTRAINT "Movie_genreId_fkey" FOREIGN KEY ("genreId") REFERENCES "MovieGenre"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "MovieRating" ADD CONSTRAINT "MovieRating_movieId_fkey" FOREIGN KEY ("movieId") REFERENCES "Movie"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
