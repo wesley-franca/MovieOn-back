@@ -1,20 +1,21 @@
-import app, { init } from "../../src/app";
-
-import { connectDb } from "../../src/config/database";
+import supertest from "supertest";
 import { faker } from "@faker-js/faker";
 import httpStatus from "http-status";
-import supertest from "supertest";
+import app from "../../src/app";
+import { connectDb } from "../../src/config/database";
 import { cleanDb } from "../helpers";
-import { createUser } from "../factories/user.factory";
+import { createUser } from "../factories/users.factory";
 
+const server = supertest(app);
 const prisma = connectDb();
 
-beforeAll(async () => {
-    await init();
+beforeEach(async () => {
     await cleanDb(prisma);
 });
 
-const server = supertest(app);
+afterAll(async () => {
+    await cleanDb(prisma);
+});
 
 describe("POST /users", () => {
     it("should respond with status 400 when body is not given", async () => {
@@ -39,7 +40,7 @@ describe("POST /users", () => {
 
         it("should respond with status 400 when email is not valid", async () => {
             const email = faker.lorem.word();
-            const body = generateValidBody({email});
+            const body = generateValidBody({ email });
 
             const response = await server.post("/users").send(body);
 
@@ -48,7 +49,7 @@ describe("POST /users", () => {
 
         it("should respond with status 400 when password is not valid", async () => {
             const password = faker.lorem.word();
-            const body = generateValidBody({password});
+            const body = generateValidBody({ password });
 
             const response = await server.post("/users").send(body);
 

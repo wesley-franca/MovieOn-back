@@ -1,14 +1,9 @@
-import app, { init } from "./app.js";
+import { loadEnv } from "./config/envs";
+import app from "./app";
 
-const port = +process.env.PORT || 4000;
+loadEnv();
 
-app.get("/", (req, res) => {
-    return res.sendStatus(200);
-});
-
-init().then(() => {
-    app.listen(port, () => {
-    /* eslint-disable-next-line no-console */
-        console.log(`Server is listening on port ${port}.`);
-    });
+app.listen(process.env.PORT, () => {
+    // eslint-disable-next-line no-console
+    console.log(`Listening on ${process.env.PORT}`);
 });
