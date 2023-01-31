@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
 
-// import userRouter from "./modules/users/users.router";
+import { userRouter } from "./modules/users/user.router";
 
 const app = express();
 app
     .use(cors())
     .use(express.json())
-    .get("/status", (_req, res) => res.send("Ok"));
-// .use(userRouter);
+    .get("/", (_req, res) => res.send("Ok"))
+    .use("/users", userRouter);
 
 export default app;
