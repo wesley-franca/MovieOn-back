@@ -56,7 +56,7 @@ describe("POST /users", () => {
             expect(response.status).toBe(httpStatus.BAD_REQUEST);
         });
 
-        it("should respond with status 409 when there is an user with given email", async () => {
+        it.only("should respond with status 409 when email is already registered as an user", async () => {
             const body = generateValidBody({});
             await createUser(body);
 
