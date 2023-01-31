@@ -36,10 +36,6 @@ module.exports = {
                 "pattern": "src/middlewares",
             },
             {
-                "type": "repositories",
-                "pattern": "src/repositories",
-            },
-            {
                 "type": "routers",
                 "pattern": "src/routers",
             },
