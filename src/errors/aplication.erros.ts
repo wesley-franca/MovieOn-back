@@ -5,7 +5,7 @@ export type ApplicationError = {
 
 function duplicatedEmailError(): ApplicationError {
     return {
-        name: "DuplicatedEmailError",
+        name: "duplicatedEmailError",
         message: "There is already an user with given email",
     };
 }

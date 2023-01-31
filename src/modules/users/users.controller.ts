@@ -6,7 +6,7 @@ import { userService } from "./users.service";
 
 const newUserSchema = joi.object({
     email: joi.string().email().trim().required(),
-    password: joi.string().trim().required().regex(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})"))
+    password: joi.string().min(8).trim().required().regex(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})")) //min 8ch at least 1 lower and 1 upper letter and a special ch
 });
 
 type newUserBody = {
@@ -15,7 +15,6 @@ type newUserBody = {
 }
 
 export async function signUpUser(req: Request, res: Response) {
-    console.log(req.body);
     let body = req.body as newUserBody;
 
     const validation = newUserSchema.validate(body, { abortEarly: false });
