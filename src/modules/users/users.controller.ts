@@ -6,7 +6,7 @@ import { userService } from "./users.service";
 
 const newUserSchema = joi.object({
     email: joi.string().email().trim().required(),
-    password: joi.string().min(8).trim().required().regex(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})")) //min 8ch at least 1 lower and 1 upper letter and a special ch
+    password: joi.string().trim().required()
 });
 
 type newUserBody = {
@@ -17,8 +17,8 @@ type newUserBody = {
 export async function signUpUser(req: Request, res: Response) {
     let body = req.body as newUserBody;
 
-    const validation = newUserSchema.validate(body, { abortEarly: false });
-    if (validation.error) return res.status(httpStatus.BAD_REQUEST).send(validation.error.message);
+    const bodyValidation = newUserSchema.validate(body, { abortEarly: false });
+    if (bodyValidation.error) return res.status(httpStatus.BAD_REQUEST).send(bodyValidation.error.message);
     body = {
         email: cleanText(body.email),
         password: cleanText(body.password),
@@ -30,6 +30,10 @@ export async function signUpUser(req: Request, res: Response) {
         if(error.name === "duplicatedEmailError") {
             return res.status(httpStatus.CONFLICT).send(error);
         }
+        if(error.name === "invalidPasswordFormatError") {
+            return res.status(httpStatus.BAD_REQUEST).send(error);
+        }
+        
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 

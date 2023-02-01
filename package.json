@@ -14,7 +14,7 @@
     "dev:migration:generate": "npm run dev:load-envs prisma generate",
     "dev:migration:run": "npm run dev:load-envs prisma migrate dev",
     "dev:seed": "npm run dev:load-envs prisma db seed",
-    "dev": "NODE_ENV=dev nodemon ./src/server.ts",
+    "dev": "npm run dev:load-envs nodemon ./src/server.ts",
     "test:load-envs": "dotenv -e .env.test",
     "test:migration:generate": "npm run test:load-envs prisma generate",
     "test:migration:run": "npm run test:load-envs prisma migrate dev",
