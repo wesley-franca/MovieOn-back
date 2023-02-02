@@ -65,7 +65,7 @@ describe("POST /users", () => {
             expect(response.status).toBe(httpStatus.CONFLICT);
         });
 
-        it("should respond with status 201 and create user when given email is unique", async () => {
+        it("should respond with status 201 and create a new user", async () => {
             const body = generateValidBody({});
 
             const response = await server.post("/users").send(body);
@@ -73,7 +73,7 @@ describe("POST /users", () => {
             expect(response.status).toBe(httpStatus.CREATED);
         });
 
-        it("should save user on db", async () => {
+        it("should save new user on db", async () => {
             const body = generateValidBody({});
 
             await server.post("/users").send(body);
