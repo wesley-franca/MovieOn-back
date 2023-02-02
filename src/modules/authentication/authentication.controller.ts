@@ -34,6 +34,4 @@ export async function signIn(req: Request, res: Response) {
         
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
-
-    return res.sendStatus(201);
 }
