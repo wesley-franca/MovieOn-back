@@ -1,4 +1,5 @@
 import { prisma } from "../../src/config/database";
+import bcrypt from "bcrypt";
 
 type User = {
   email: string,
@@ -6,10 +7,11 @@ type User = {
 }
 
 export async function createUser(body: User) {
+    const hashedPassword = await bcrypt.hash(body.password, 12) as string;
     await prisma.user.create({
         data: {
             email: body.email,
-            password: body.password
+            password: hashedPassword
         }
     });
 }
