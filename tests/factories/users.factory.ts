@@ -1,6 +1,8 @@
 import { prisma } from "../../src/config/database";
 import bcrypt from "bcrypt";
 
+// const prisma = connectDb();
+
 type User = {
   email: string,
   password: string

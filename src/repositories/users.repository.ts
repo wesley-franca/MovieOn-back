@@ -1,6 +1,4 @@
-import { connectDb } from "../config/database";
-
-const prisma = connectDb();
+import { prisma } from "../config/database";
 
 function findByEmail(email: string) {
     return prisma.user.findUnique({
