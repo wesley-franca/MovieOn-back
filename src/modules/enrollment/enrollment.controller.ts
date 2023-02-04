@@ -29,3 +29,17 @@ export async function completeProfile(req: AuthenticatedRequest, res: Response) 
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
+
+export async function getEnrollment(req: AuthenticatedRequest, res: Response) {
+    const userId = req.userId;
+
+    try {
+        const result = await enrollmentService.getEnrollment(userId);
+        return res.status(httpStatus.OK).send(result); 
+    } catch (error) {
+        if(error.name === "hasNoEnrollmentError") {
+            return res.status(httpStatus.NOT_FOUND).send(error);
+        }
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    }
+}

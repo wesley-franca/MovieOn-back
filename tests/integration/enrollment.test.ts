@@ -6,7 +6,7 @@ import app from "../../src/app";
 import { prisma } from "../../src/config/database";
 import { cleanDb } from "../helpers";
 import { createUser } from "../factories/users.factory";
-import { generateValidToken } from "../factories/enrollment.factory";
+import { generateValidErollmentBody, generateEnrollment, generateValidSession } from "../factories/enrollment.factory";
 
 const server = supertest(app);
 
@@ -40,15 +40,18 @@ describe("POST /enrollment", () => {
 
     describe("when token is valid", () => {
         it("should respond with status 400 when when body is not given", async () => {
-            const token = await generateValidToken();
-  
+            const user = await createUser();
+            const session = await generateValidSession(user);
+            const token = session.token;
             const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`);
       
             expect(response.status).toBe(httpStatus.BAD_REQUEST);
         });
 
         it("should respond with status 400 when body is not valid", async () => {
-            const token = await generateValidToken();
+            const user = await createUser();
+            const session = await generateValidSession(user);
+            const token = session.token;
             const body = { [faker.lorem.word()]: faker.lorem.word() };
       
             const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
@@ -57,18 +60,11 @@ describe("POST /enrollment", () => {
         });
 
         describe("when body is valid", () => {
-            const generateValidBody = () => ({
-                name: faker.name.firstName(),
-                lastName: faker.name.lastName(),
-                instagram: faker.lorem.word(),
-                whatsapp: "(21)98999-9999",
-                biography: faker.lorem.text(),
-                birthday: faker.date.birthdate()
-            });
-
             it("should respond with status 200 when body is valid", async () => {
-                const token = await generateValidToken();
-                const body = generateValidBody();
+                const user = await createUser();
+                const session = await generateValidSession(user);
+                const token = session.token;
+                const body = generateValidErollmentBody();
 
                 const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
 
@@ -76,8 +72,10 @@ describe("POST /enrollment", () => {
             });
 
             it("should create a new enrollment in db", async () => {
-                const token = await generateValidToken();
-                const body = generateValidBody();
+                const user = await createUser();
+                const session = await generateValidSession(user);
+                const token = session.token;
+                const body = generateValidErollmentBody();
 
                 await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
 
@@ -87,6 +85,77 @@ describe("POST /enrollment", () => {
 
                 expect(enrollment.lastName).toBe(body.lastName);
             });
+            describe("when user already have an enrollment", () => {
+                it("should respond with status 200 and update the enrrolment if body is valid ", async () => {
+                    const user = await createUser();
+                    const session = await generateValidSession(user);
+                    const token = session.token;
+                    const body = generateValidErollmentBody();
+                    await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
+                    
+                    const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
+
+                    expect(response.status).toBe(httpStatus.OK);
+                });
+            });
+        });
+    });
+});
+
+describe("GET /enrollment", () => {
+    it("should respond with status 401 when token is not given", async () => {
+        const response = await server.get("/enrollment");
+
+        expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+    });
+
+    it("should respond with status 401 when token is not valid", async () => {
+        const token = faker.lorem.word();
+
+        const response = await server.get("/enrollment").set("Authorization", `Bearer ${token}`);
+
+        expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+    });
+
+    it("should respond with status 401 if there is no session for given token", async () => {
+        const userWithoutSession = await createUser();
+        const token = jwt.sign({ userId: userWithoutSession.id }, process.env.JWT_SECRET);
+  
+        const response = await server.get("/enrollment").set("Authorization", `Bearer ${token}`);
+  
+        expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+    });
+
+    describe("when token is valid", () => {
+        it("should respond with status 404 if user don't have an enrollment", async () => {
+            const user = await createUser();
+            const session = await generateValidSession(user);
+            const token = session.token;
+
+            const response = await server.get("/enrollment").set("Authorization", `Bearer ${token}`);
+
+            expect(response.status).toBe(httpStatus.NOT_FOUND);
+        });
+
+        it("should respond with status 200 and user enrollment data", async () => {
+            const user = await createUser();
+            const session = await generateValidSession(user);
+            const token = session.token;
+            const userId = user.id;
+            const enrollment = await generateEnrollment(userId);
+
+            const response = await server.get("/enrollment").set("Authorization", `Bearer ${token}`);
+
+            expect(response.status).toBe(httpStatus.OK);
+            expect (response.body).toEqual(expect.objectContaining({
+                id: enrollment.id,
+                name: enrollment.name,
+                lastName: enrollment.lastName,
+                instagram: enrollment.instagram,
+                whatsapp: enrollment.whatsapp,
+                biography: enrollment.biography,
+                birthday: enrollment.birthday.toISOString()
+            }));
         });
     });
 });
