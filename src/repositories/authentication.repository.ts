@@ -1,8 +1,6 @@
-import { connectDb } from "../config/database";
+import { prisma } from "../config/database";
 
-const prisma = connectDb();
-
-function create(token: string, userId: number) {
+async function create(token: string, userId: number) {
     return prisma.session.upsert({
         where: {
             userId

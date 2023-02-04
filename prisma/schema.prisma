@@ -37,6 +37,7 @@ model Enrollment {
   birthday  DateTime
   instagram String   @unique @db.VarChar(30)
   whatsapp  String   @unique @db.VarChar(30)
+  biography String   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   User User @relation(fields: [userId], references: [id])

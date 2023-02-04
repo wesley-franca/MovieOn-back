@@ -2,18 +2,13 @@ import supertest from "supertest";
 import { faker } from "@faker-js/faker";
 import httpStatus from "http-status";
 import app from "../../src/app";
-import { connectDb } from "../../src/config/database";
+import { prisma } from "../../src/config/database";
 import { cleanDb } from "../helpers";
 import { createUser } from "../factories/users.factory";
 
 const server = supertest(app);
-const prisma = connectDb();
 
 beforeEach(async () => {
-    await cleanDb(prisma);
-});
-
-afterAll(async () => {
     await cleanDb(prisma);
 });
 

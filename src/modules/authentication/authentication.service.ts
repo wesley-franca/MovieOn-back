@@ -17,7 +17,7 @@ async function signIn({ email, password }: userBody) {
     
     const token = jwt.sign({ userId }, process.env.JWT_SECRET) as string;
 
-    const session = authenticationRepository.create(token, userId);
+    const session = await authenticationRepository.create(token, userId);
     return session; 
 }
 

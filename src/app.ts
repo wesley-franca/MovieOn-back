@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
-
+import { connectDb } from "./config/database";
 import { userRouter } from "./modules/users/user.router";
 import { authenticationRouter } from "./modules/authentication/authentication.router";
 import { enrollmentRouter } from "./modules/enrollment/enrollment.router";
-
+connectDb();
 const app = express();
 app
     .use(cors())
