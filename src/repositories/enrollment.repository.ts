@@ -1,30 +1,26 @@
 import { connectDb } from "../config/database";
+import { newEnrollmentBody } from "../modules/enrollment/enrollment.types";
 
 const prisma = connectDb();
 
-type enrollmentBody = {
-  userId: number, 
-  birthday, 
-  instagram: string, 
-  name: string, 
-  lastName: string, 
-  whatsapp: string 
-}
 function create( { 
     userId,
-    birthday, 
-    instagram, 
-    name, 
-    lastName, 
-    whatsapp }: enrollmentBody) { 
+    name,
+    lastName,
+    instagram,
+    whatsapp,
+    biography,
+    birthday,
+}: newEnrollmentBody) { 
     return prisma.enrollment.create({
         data: {
             userId,
             name,
             lastName,
-            birthday,
             instagram,
             whatsapp,
+            biography,
+            birthday
         }
     });
 }

@@ -1,16 +1,9 @@
 import { prisma } from "../../src/config/database";
 import bcrypt from "bcrypt";
 
-// const prisma = connectDb();
-
-type User = {
-  email: string,
-  password: string
-}
-
-export async function createUser(body: User) {
+export async function createUser(body={ email: "teste@email.com", password: "#123123Ab" }) {
     const hashedPassword = await bcrypt.hash(body.password, 12) as string;
-    await prisma.user.create({
+    return prisma.user.create({
         data: {
             email: body.email,
             password: hashedPassword
