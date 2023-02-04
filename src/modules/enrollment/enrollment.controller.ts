@@ -1,19 +1,10 @@
 import { Response } from "express";
 import httpStatus from "http-status";
-import joi from "joi";
 import { AuthenticatedRequest } from "../../middleware/authenticationMiddleware";
+import { newEnrollmentSchema } from "../../schemas/enrollment.schemas";
 import { cleanText } from "../../utils/cleanText";
 import { enrollmentService } from "./enrollment.service";
-import { newEnrollmentBody } from "./enrollment.types";
-
-const newEnrollmentSchema = joi.object({
-    name: joi.string().trim().required(),
-    lastName: joi.string().trim().required(),
-    instagram: joi.string().trim().required(),
-    whatsapp: joi.string().trim().required(),
-    biography: joi.string().trim().required(),
-    birthday: joi.string().trim().required()
-});
+import { newEnrollmentBody } from "../../types/enrollment.types";
 
 export async function completeProfile(req: AuthenticatedRequest, res: Response) {
     const userId = req.userId;
@@ -35,6 +26,20 @@ export async function completeProfile(req: AuthenticatedRequest, res: Response) 
         await enrollmentService.createEnrollment(body);
         return res.sendStatus(200);
     } catch (error) {
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
+export async function getEnrollment(req: AuthenticatedRequest, res: Response) {
+    const userId = req.userId;
+
+    try {
+        const result = await enrollmentService.getEnrollment(userId);
+        return res.status(httpStatus.OK).send(result); 
+    } catch (error) {
+        if(error.name === "hasNoEnrollmentError") {
+            return res.status(httpStatus.NOT_FOUND).send(error);
+        }
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }

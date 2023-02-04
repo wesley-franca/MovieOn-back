@@ -1,18 +1,9 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import joi from "joi";
+import { newUserSchema } from "../../schemas/user.schemas";
 import { cleanText } from "../../utils/cleanText";
 import { userService } from "./users.service";
-
-const newUserSchema = joi.object({
-    email: joi.string().email().trim().required(),
-    password: joi.string().trim().required()
-});
-
-type newUserBody = {
-  email: string,
-  password: string
-}
+import { newUserBody } from "../../types/users.type";
 
 export async function signUpUser(req: Request, res: Response) {
     let body = req.body as newUserBody;

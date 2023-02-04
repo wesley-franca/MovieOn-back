@@ -1,9 +1,9 @@
 import { connectDb } from "../config/database";
-import { newEnrollmentBody } from "../modules/enrollment/enrollment.types";
+import { newEnrollmentBody } from "../types/enrollment.types";
 
 const prisma = connectDb();
 
-function create( { 
+function upsert( { 
     userId,
     name,
     lastName,
@@ -12,8 +12,19 @@ function create( {
     biography,
     birthday,
 }: newEnrollmentBody) { 
-    return prisma.enrollment.create({
-        data: {
+    return prisma.enrollment.upsert({
+        where: {
+            userId
+        },
+        update: {
+            name,
+            lastName,
+            instagram,
+            whatsapp,
+            biography,
+            birthday,
+        },
+        create: {
             userId,
             name,
             lastName,
@@ -21,10 +32,19 @@ function create( {
             whatsapp,
             biography,
             birthday
+        },
+    });
+}
+
+function getBuUserId(userId: number) { 
+    return prisma.enrollment.findUnique({
+        where: {
+            userId
         }
     });
 }
 
 export const enrollmentRepository = {
-    create
+    upsert,
+    getBuUserId
 };
