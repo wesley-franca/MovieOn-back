@@ -1,5 +1,5 @@
 import { connectDb } from "../config/database";
-import { newEnrollmentBody } from "../modules/enrollment/enrollment.types";
+import { newEnrollmentBody } from "../types/enrollment.types";
 
 const prisma = connectDb();
 

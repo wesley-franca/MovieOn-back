@@ -1,19 +1,10 @@
 import { Response } from "express";
 import httpStatus from "http-status";
-import joi from "joi";
 import { AuthenticatedRequest } from "../../middleware/authenticationMiddleware";
+import { newEnrollmentSchema } from "../../schemas/enrollment.schemas";
 import { cleanText } from "../../utils/cleanText";
 import { enrollmentService } from "./enrollment.service";
-import { newEnrollmentBody } from "./enrollment.types";
-
-const newEnrollmentSchema = joi.object({
-    name: joi.string().trim().required(),
-    lastName: joi.string().trim().required(),
-    instagram: joi.string().trim().required(),
-    whatsapp: joi.string().trim().required(),
-    biography: joi.string().trim().required(),
-    birthday: joi.string().trim().required()
-});
+import { newEnrollmentBody } from "../../types/enrollment.types";
 
 export async function completeProfile(req: AuthenticatedRequest, res: Response) {
     const userId = req.userId;
