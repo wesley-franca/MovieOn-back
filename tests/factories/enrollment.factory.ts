@@ -15,17 +15,28 @@ export async function generateValidSession(user: User) {
     });
 }
 
-export const generateValidErollmentBody = () => ({
-    name: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    instagram: faker.lorem.word(),
-    whatsapp: "(21)98999-9999",
-    biography: faker.lorem.text(),
-    birthday: faker.date.birthdate()
-});
+type enrollmentBody = {
+    name?: string,
+    lastName?: string,
+    instagram?: string,
+    whatsapp?: string,
+    biography?: string,
+    birthday?: Date | string
+}
+
+export function generateValidErollmentBody({ birthday=(faker.date.birthdate()) }: enrollmentBody) {
+    return {
+        name: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        instagram: faker.lorem.word(),
+        whatsapp: "(21)98999-9999",
+        biography: faker.lorem.text(),
+        birthday
+    };
+}
 
 export async function generateEnrollment(userId: number) {
-    const body = generateValidErollmentBody();
+    const body = generateValidErollmentBody({});
     return prisma.enrollment.create({
         data: {
             userId,
