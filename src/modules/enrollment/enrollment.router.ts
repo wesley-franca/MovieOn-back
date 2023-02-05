@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { authenticateTokenMiddleware } from "../../middleware/authenticationMiddleware";
-import { completeProfile, getEnrollment } from "./enrollment.controller";
+import { createEnrollment, getEnrollment } from "./enrollment.controller";
 
 const enrollmentRouter = Router();
 
 enrollmentRouter
-    .post("/", authenticateTokenMiddleware, completeProfile)
+    .post("/", authenticateTokenMiddleware, createEnrollment)
     .get("/", authenticateTokenMiddleware, getEnrollment);
 
 export { enrollmentRouter };

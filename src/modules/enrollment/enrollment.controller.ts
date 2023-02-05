@@ -6,7 +6,7 @@ import { cleanText } from "../../utils/cleanText";
 import { enrollmentService } from "./enrollment.service";
 import { newEnrollmentBody } from "../../types/enrollment.types";
 
-export async function completeProfile(req: AuthenticatedRequest, res: Response) {
+export async function createEnrollment(req: AuthenticatedRequest, res: Response) {
     const userId = req.userId;
     let body = req.body as newEnrollmentBody;
     
@@ -24,8 +24,11 @@ export async function completeProfile(req: AuthenticatedRequest, res: Response) 
     };
     try {
         await enrollmentService.createEnrollment(body);
-        return res.sendStatus(200);
+        return res.sendStatus(httpStatus.CREATED);
     } catch (error) {
+        if(error.name === "invalidBirthdayDateError") {
+            return res.status(httpStatus.BAD_REQUEST).send(error);
+        }
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
@@ -35,7 +38,7 @@ export async function getEnrollment(req: AuthenticatedRequest, res: Response) {
 
     try {
         const result = await enrollmentService.getEnrollment(userId);
-        return res.status(httpStatus.OK).send(result); 
+        return res.status(httpStatus.CREATED).send(result); 
     } catch (error) {
         if(error.name === "hasNoEnrollmentError") {
             return res.status(httpStatus.NOT_FOUND).send(error);

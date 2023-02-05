@@ -59,23 +59,35 @@ describe("POST /enrollment", () => {
             expect(response.status).toBe(httpStatus.BAD_REQUEST);
         });
 
+        it("should respond with status 400 when birthday date is not valid", async () => {
+            const user = await createUser();
+            const session = await generateValidSession(user);
+            const token = session.token;
+            const invalidBirthday = faker.word.verb();
+            const body = generateValidErollmentBody({ birthday: invalidBirthday });
+
+            const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
+
+            expect(response.status).toBe(httpStatus.BAD_REQUEST);
+        });
+
         describe("when body is valid", () => {
-            it("should respond with status 200 when body is valid", async () => {
+            it("should respond with status 201 when body is valid", async () => {
                 const user = await createUser();
                 const session = await generateValidSession(user);
                 const token = session.token;
-                const body = generateValidErollmentBody();
+                const body = generateValidErollmentBody({});
 
                 const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
 
-                expect(response.status).toBe(httpStatus.OK);
+                expect(response.status).toBe(httpStatus.CREATED);
             });
 
             it("should create a new enrollment in db", async () => {
                 const user = await createUser();
                 const session = await generateValidSession(user);
                 const token = session.token;
-                const body = generateValidErollmentBody();
+                const body = generateValidErollmentBody({});
 
                 await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
 
@@ -86,16 +98,16 @@ describe("POST /enrollment", () => {
                 expect(enrollment.lastName).toBe(body.lastName);
             });
             describe("when user already have an enrollment", () => {
-                it("should respond with status 200 and update the enrrolment if body is valid ", async () => {
+                it("should respond with status 201 and update the enrrolment if body is valid ", async () => {
                     const user = await createUser();
                     const session = await generateValidSession(user);
                     const token = session.token;
-                    const body = generateValidErollmentBody();
+                    const body = generateValidErollmentBody({});
                     await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
                     
                     const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
 
-                    expect(response.status).toBe(httpStatus.OK);
+                    expect(response.status).toBe(httpStatus.CREATED);
                 });
             });
         });
@@ -146,7 +158,7 @@ describe("GET /enrollment", () => {
 
             const response = await server.get("/enrollment").set("Authorization", `Bearer ${token}`);
 
-            expect(response.status).toBe(httpStatus.OK);
+            expect(response.status).toBe(httpStatus.CREATED);
             expect (response.body).toEqual(expect.objectContaining({
                 id: enrollment.id,
                 name: enrollment.name,
