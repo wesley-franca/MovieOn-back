@@ -20,7 +20,6 @@
     "test:migration:run": "npm run test:load-envs prisma migrate dev",
     "test:seed": "npm run test:load-envs prisma db seed",
     "test": "dotenv -e .env.test -- npx jest --runInBand",
-    "test-all": "npm run test users && npm run test authentication && npm run test enrollment",
     "coverage": "npm run test -- --coverage"
   },
   "engines": {
