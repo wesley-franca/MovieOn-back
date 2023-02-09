@@ -32,19 +32,19 @@ describe("POST /enrollment", () => {
     it("should respond with status 401 if there is no session for given token", async () => {
         const userWithoutSession = await createUser();
         const token = jwt.sign({ userId: userWithoutSession.id }, process.env.JWT_SECRET);
-  
+
         const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`);
-  
+
         expect(response.status).toBe(httpStatus.UNAUTHORIZED);
     });
 
     describe("when token is valid", () => {
-        it("should respond with status 400 when when body is not given", async () => {
+        it("should respond with status 400 when body is not given", async () => {
             const user = await createUser();
             const session = await generateValidSession(user);
             const token = session.token;
             const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`);
-      
+
             expect(response.status).toBe(httpStatus.BAD_REQUEST);
         });
 
@@ -53,9 +53,9 @@ describe("POST /enrollment", () => {
             const session = await generateValidSession(user);
             const token = session.token;
             const body = { [faker.lorem.word()]: faker.lorem.word() };
-      
+
             const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
-      
+
             expect(response.status).toBe(httpStatus.BAD_REQUEST);
         });
 
@@ -104,7 +104,7 @@ describe("POST /enrollment", () => {
                     const token = session.token;
                     const body = generateValidErollmentBody({});
                     await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
-                    
+
                     const response = await server.post("/enrollment").set("Authorization", `Bearer ${token}`).send(body);
 
                     expect(response.status).toBe(httpStatus.CREATED);
@@ -132,9 +132,9 @@ describe("GET /enrollment", () => {
     it("should respond with status 401 if there is no session for given token", async () => {
         const userWithoutSession = await createUser();
         const token = jwt.sign({ userId: userWithoutSession.id }, process.env.JWT_SECRET);
-  
+
         const response = await server.get("/enrollment").set("Authorization", `Bearer ${token}`);
-  
+
         expect(response.status).toBe(httpStatus.UNAUTHORIZED);
     });
 
@@ -159,7 +159,7 @@ describe("GET /enrollment", () => {
             const response = await server.get("/enrollment").set("Authorization", `Bearer ${token}`);
 
             expect(response.status).toBe(httpStatus.CREATED);
-            expect (response.body).toEqual(expect.objectContaining({
+            expect(response.body).toEqual(expect.objectContaining({
                 id: enrollment.id,
                 name: enrollment.name,
                 lastName: enrollment.lastName,
