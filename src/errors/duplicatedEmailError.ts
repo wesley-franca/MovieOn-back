@@ -6,4 +6,3 @@ export function duplicatedEmailError(): ApplicationError {
         message: "O email fornecido já possui um cadastro",
     };
 }
-
