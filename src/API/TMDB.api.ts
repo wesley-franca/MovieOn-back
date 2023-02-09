@@ -4,7 +4,7 @@ export type MovieTrendingList = {
     page: number;
     total_results: number;
     total_pages: number;
-    results: [
+    results: [{
         poster_path: string | null,
         adult: boolean,
         overview: string,
@@ -19,7 +19,7 @@ export type MovieTrendingList = {
         vote_count: number,
         video: boolean,
         vote_average: number
-    ];
+    }];
     dates: [maximum: string, minimum: string];
 };
 

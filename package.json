@@ -8,7 +8,6 @@
     "migration:run": "npx prisma migrate dev",
     "seed": "npx prisma db seed",
     "start": "tsc && node ./dist/src/server.js",
-    "lint": "eslint .",
     "node": "nvm use v16.17.0",
     "dev:load-envs": "dotenv -e .env.dev",
     "dev:migration:generate": "npm run dev:load-envs prisma generate",
@@ -19,8 +18,7 @@
     "test:migration:generate": "npm run test:load-envs prisma generate",
     "test:migration:run": "npm run test:load-envs prisma migrate dev",
     "test:seed": "npm run test:load-envs prisma db seed",
-    "test": "dotenv -e .env.test -- npx jest --runInBand",
-    "coverage": "npm run test -- --coverage"
+    "test": "dotenv -e .env.test -- npx jest --runInBand"
   },
   "engines": {
     "npm": ">=8.0.0 <9.0.0",
