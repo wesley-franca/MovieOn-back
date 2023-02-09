@@ -10,8 +10,8 @@ async function createEnrollment(body: newEnrollmentBody) {
 }
 
 async function getEnrollment(userId: number) {
-    const enrollment = await enrollmentRepository.getBuUserId(userId);
-    if(!enrollment) throw hasNoEnrollmentError();
+    const enrollment = await enrollmentRepository.getByUserId(userId);
+    if (!enrollment) throw hasNoEnrollmentError();
     delete enrollment.userId;
     delete enrollment.createdAt;
     delete enrollment.updatedAt;
@@ -19,8 +19,8 @@ async function getEnrollment(userId: number) {
     return enrollment;
 }
 
-async function checkValidBirthdayOrFail(birthday: Date|string) {
-    if((birthday.toString() === "Invalid Date" || typeof(birthday) === "string" )) throw invalidBirthdayDateError();
+async function checkValidBirthdayOrFail(birthday: Date | string) {
+    if ((birthday.toString() === "Invalid Date" || typeof (birthday) === "string")) throw invalidBirthdayDateError();
 
     const today = new Date();
     let age = today.getFullYear() - birthday.getFullYear();

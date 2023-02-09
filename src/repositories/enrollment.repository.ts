@@ -3,7 +3,7 @@ import { newEnrollmentBody } from "../types/enrollment.types";
 
 const prisma = connectDb();
 
-function upsert( { 
+function upsert({
     userId,
     name,
     lastName,
@@ -11,7 +11,7 @@ function upsert( {
     whatsapp,
     biography,
     birthday,
-}: newEnrollmentBody) { 
+}: newEnrollmentBody) {
     return prisma.enrollment.upsert({
         where: {
             userId
@@ -36,7 +36,7 @@ function upsert( {
     });
 }
 
-function getBuUserId(userId: number) { 
+function getByUserId(userId: number) {
     return prisma.enrollment.findUnique({
         where: {
             userId
@@ -46,5 +46,5 @@ function getBuUserId(userId: number) {
 
 export const enrollmentRepository = {
     upsert,
-    getBuUserId
+    getByUserId
 };
