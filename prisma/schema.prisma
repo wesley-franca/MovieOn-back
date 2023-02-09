@@ -8,11 +8,11 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int           @id @default(autoincrement())
+  email       String        @unique @db.VarChar(255)
+  password    String        @db.VarChar(255)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   Session     Session[]
   Enrollment  Enrollment?
   MovieRating MovieRating[]
@@ -21,12 +21,12 @@ model User {
 }
 
 model Session {
-  id     Int    @id @default(autoincrement())
-  userId Int    @unique
-  token  String
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  token     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  User User @relation(fields: [userId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 model Enrollment {
@@ -37,49 +37,39 @@ model Enrollment {
   birthday  DateTime
   instagram String   @unique @db.VarChar(30)
   whatsapp  String   @unique @db.VarChar(30)
-  biography String   
+  biography String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  User User @relation(fields: [userId], references: [id])
-}
-
-model MovieGenre {
-  id   Int    @id
-  name String @db.VarChar(20)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  movie Movie[]
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 model Movie {
-  id        Int    @id @default(autoincrement())
-  title     String @db.VarChar(255)
-  director  String @db.VarChar(255)
-  genreId   Int
-  releaseAt String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  MovieGenre  MovieGenre    @relation(fields: [genreId], references: [id])
+  id          Int           @id
+  title       String        
+  posterPath  String
+  releasedAt   String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   LikedMovies MovieRating[]
 }
 
 model MovieRating {
-  id      Int     @id @default(autoincrement())
-  userId  Int
-  movieId Int
-  liked   Boolean
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  movieId   Int
+  liked     Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Movie Movie @relation(fields: [movieId], references: [id])
-  User  User  @relation(fields: [userId], references: [id])
+  Movie     Movie    @relation(fields: [movieId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 model Connections {
-  id          Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   userId      Int
   matchedUser Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User  User @relation("user", fields: [userId], references: [id])
-  Match User @relation("match", fields: [matchedUser], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User     @relation("user", fields: [userId], references: [id])
+  Match       User     @relation("match", fields: [matchedUser], references: [id])
 }

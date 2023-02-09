@@ -10,7 +10,7 @@ const app = express();
 app
     .use(cors())
     .use(express.json())
-    .get("/", async (_req, res) => { res.send("Ok"); })
+    .get("/", async (_req, res) => {res.send("Ok");})
     .use("/users", userRouter)
     .use("/auth", authenticationRouter)
     .use("/enrollment", enrollmentRouter);
