@@ -6,7 +6,7 @@ import app from "../../src/app";
 import { prisma } from "../../src/config/database";
 import { cleanDb } from "../helpers";
 import { createUser } from "../factories/users.factory";
-import {  generateEnrollment, generateValidSession } from "../factories/enrollment.factory";
+import { generateEnrollment, generateValidSession } from "../factories/enrollment.factory";
 import { generateRatedMovie, generateValidMovieBody, getValidMovieId } from "../factories/movies.factory";
 
 const server = supertest(app);
@@ -111,7 +111,7 @@ describe("POST /movie/:movieId", () => {
 
           const response = await server.post(`/movies/${validParam}`).set("Authorization", `Bearer ${token}`).send(body);
 
-          expect(response.status).toBe(httpStatus.CREATED);
+          expect(response.status).toBe(httpStatus.CONFLICT);
         });
 
         it("should respond with status 201", async () => {
