@@ -22,7 +22,7 @@ async function postRatingMovie(userId: number, movieId: number, body: ratingMovi
 async function getMovies(userId: number) {
   await haveEnrollmentOrFail(userId);
 
-  return
+  return movieRepository.get(userId);
 }
 
 async function haveEnrollmentOrFail(userId: number) {

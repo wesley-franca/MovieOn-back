@@ -10,6 +10,18 @@ function getByMovieId(movieId: number) {
   });
 }
 
+function get(userId: number) {
+  return prisma.movie.findMany({
+    where: {
+      LikedMovies: {
+        every: { userId }
+      }
+    },
+    take: 20
+  });
+}
+
 export const movieRepository = {
   getByMovieId,
+  get
 };

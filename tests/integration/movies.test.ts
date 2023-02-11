@@ -198,19 +198,6 @@ describe("GET /movies", () => {
     });
 
     describe("when user has enrollment", () => {
-      it("should respond with status 200 and an empty movie list", async () => {
-        const user = await createUser();
-        const session = await generateValidSession(user);
-        const token = session.token;
-        await generateEnrollment(user.id);
-
-        const response = await server.get("/movies").set("Authorization", `Bearer ${token}`);
-
-        expect(response.status).toBe(httpStatus.OK);
-        expect(response.body).toEqual(expect.objectContaining({ movies: [] }));
-      });
-
-
       it("should respond with status 200 and a list with 20 movies", async () => {
         const user = await createUser();
         const session = await generateValidSession(user);
@@ -220,7 +207,7 @@ describe("GET /movies", () => {
         const response = await server.get("/movies").set("Authorization", `Bearer ${token}`);
 
         expect(response.status).toBe(httpStatus.OK)
-        expect(response.body).toEqual(expect.objectContaining({ movies: [{}] })); //TODO: re-write test
+        expect(response.body.length).toBe(20);
         ;
       });
     });

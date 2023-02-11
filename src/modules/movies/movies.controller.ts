@@ -34,9 +34,8 @@ export async function getMovies(req: AuthenticatedRequest, res: Response) {
     const userId = req.userId;
 
     try {
-        await movieService.getMovies(userId);
-        // return res.sendStatus(httpStatus.OK);
-        return res.sendStatus(503);
+        const result = await movieService.getMovies(userId);
+        return res.status(httpStatus.OK).send(result);
     } catch (error) {
         if (error.name === "hasNoEnrollmentError") {
             return res.status(httpStatus.FORBIDDEN).send(error);
