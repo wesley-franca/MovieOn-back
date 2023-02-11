@@ -11,7 +11,7 @@ async function main() {
     const querys = NumberMoviesToInsert / 20;
     const moviesToInsert = [];
 
-    for (let i = 1; i < querys; i++) {
+    for (let i = 1; i <= querys; i++) {
       const data = await TMDB.getTopRated(i.toString())
       data.results.map((movie) => {
         moviesToInsert.push({

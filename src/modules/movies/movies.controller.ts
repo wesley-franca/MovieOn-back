@@ -29,3 +29,17 @@ export async function postMovieRating(req: AuthenticatedRequest, res: Response) 
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
+
+export async function getMovies(req: AuthenticatedRequest, res: Response) {
+    const userId = req.userId;
+
+    try {
+        const result = await movieService.getMovies(userId);
+        return res.status(httpStatus.OK).send(result);
+    } catch (error) {
+        if (error.name === "hasNoEnrollmentError") {
+            return res.status(httpStatus.FORBIDDEN).send(error);
+        }
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    }
+}

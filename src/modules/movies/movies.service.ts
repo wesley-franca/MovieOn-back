@@ -7,8 +7,7 @@ import { movieRatingRepository } from "../../repositories/movieRating.repository
 import { ratingMovieBody } from "../../types/movies.types";
 
 async function postRatingMovie(userId: number, movieId: number, body: ratingMovieBody) {
-  const enrollment = await enrollmentRepository.getByUserId(userId);
-  if (!enrollment) throw hasNoEnrollmentError();
+  await haveEnrollmentOrFail(userId);
 
   if (isNaN(movieId)) throw invalidMovieIdError();
   const movie = await movieRepository.getByMovieId(movieId);
@@ -20,6 +19,18 @@ async function postRatingMovie(userId: number, movieId: number, body: ratingMovi
   return movieRatingRepository.create({ userId, movieId, liked: body.liked })
 }
 
+async function getMovies(userId: number) {
+  await haveEnrollmentOrFail(userId);
+
+  return movieRepository.get(userId);
+}
+
+async function haveEnrollmentOrFail(userId: number) {
+  const enrollment = await enrollmentRepository.getByUserId(userId);
+  if (!enrollment) throw hasNoEnrollmentError();
+}
+
 export const movieService = {
-  postRatingMovie
+  postRatingMovie,
+  getMovies,
 };
