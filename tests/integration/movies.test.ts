@@ -15,7 +15,7 @@ beforeEach(async () => {
   await cleanDb(prisma);
 });
 
-describe("POST /movie/:movieId", () => {
+describe("POST /movies/:movieId", () => {
   it("should respond with status 401 when token is not given", async () => {
     const response = await server.post("/movies/0");
 
@@ -99,50 +99,129 @@ describe("POST /movie/:movieId", () => {
           expect(response.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
         });
 
-        describe("when route param is a valid movie id", () => { });
-        it("should respond with status 409 when movie is already rated by user", async () => {
-          const user = await createUser();
-          const session = await generateValidSession(user);
-          const token = session.token;
-          const body = generateValidMovieBody();
-          const validParam = await getValidMovieId();
-          await generateEnrollment(user.id);
-          await generateRatedMovie({ userId: user.id, movieId: validParam, liked: body.liked });
+        describe("when route param is a valid movie id", () => {
+          it("should respond with status 409 when movie is already rated by user", async () => {
+            const user = await createUser();
+            const session = await generateValidSession(user);
+            const token = session.token;
+            const body = generateValidMovieBody();
+            const validParam = await getValidMovieId();
+            await generateEnrollment(user.id);
+            await generateRatedMovie({ userId: user.id, movieId: validParam, liked: body.liked });
 
-          const response = await server.post(`/movies/${validParam}`).set("Authorization", `Bearer ${token}`).send(body);
+            const response = await server.post(`/movies/${validParam}`).set("Authorization", `Bearer ${token}`).send(body);
 
-          expect(response.status).toBe(httpStatus.CONFLICT);
-        });
-
-        it("should respond with status 201", async () => {
-          const user = await createUser();
-          const session = await generateValidSession(user);
-          const token = session.token;
-          const body = generateValidMovieBody();
-          const validParam = await getValidMovieId();
-          await generateEnrollment(user.id);
-
-          const response = await server.post(`/movies/${validParam}`).set("Authorization", `Bearer ${token}`).send(body);
-
-          expect(response.status).toBe(httpStatus.CREATED);
-        });
-
-        it("should create a new rated movie rating in db", async () => {
-          const user = await createUser();
-          const session = await generateValidSession(user);
-          const token = session.token;
-          const body = generateValidMovieBody();
-          const validParam = await getValidMovieId();
-          await generateEnrollment(user.id);
-
-          await server.post(`/movies/${validParam}`).set("Authorization", `Bearer ${token}`).send(body);
-
-          const movieRating = await prisma.movieRating.findFirst({
-            where: { movieId: validParam }
+            expect(response.status).toBe(httpStatus.CONFLICT);
           });
 
-          expect(movieRating.movieId).toBe(validParam);
+          it("should respond with status 201", async () => {
+            const user = await createUser();
+            const session = await generateValidSession(user);
+            const token = session.token;
+            const body = generateValidMovieBody();
+            const validParam = await getValidMovieId();
+            await generateEnrollment(user.id);
+
+            const response = await server.post(`/movies/${validParam}`).set("Authorization", `Bearer ${token}`).send(body);
+
+            expect(response.status).toBe(httpStatus.CREATED);
+          });
+
+          it("should create a new rated movie rating in db", async () => {
+            const user = await createUser();
+            const session = await generateValidSession(user);
+            const token = session.token;
+            const body = generateValidMovieBody();
+            const validParam = await getValidMovieId();
+            await generateEnrollment(user.id);
+
+            await server.post(`/movies/${validParam}`).set("Authorization", `Bearer ${token}`).send(body);
+
+            const movieRating = await prisma.movieRating.findFirst({
+              where: { movieId: validParam }
+            });
+
+            expect(movieRating.movieId).toBe(validParam);
+          });
         });
+      });
+    });
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+describe("GET /movies", () => {
+  it("should respond with status 401 when token is not given", async () => {
+    const response = await server.get("/movies");
+
+    expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+
+  it("should respond with status 401 when token is not valid", async () => {
+    const token = faker.lorem.word();
+
+    const response = await server.get("/movies").set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+
+  it("should respond with status 401 if there is no session for given token", async () => {
+    const userWithoutSession = await createUser();
+    const token = jwt.sign({ userId: userWithoutSession.id }, process.env.JWT_SECRET);
+
+    const response = await server.get("/movies").set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+
+  describe("when token is valid", () => {
+    it("should respond with status 403 when user don't have an enrollment", async () => {
+      const user = await createUser();
+      const session = await generateValidSession(user);
+      const token = session.token;
+
+      const response = await server.get("/movies").set("Authorization", `Bearer ${token}`);
+
+      expect(response.status).toBe(httpStatus.FORBIDDEN);
+    });
+
+    describe("when user has enrollment", () => {
+      it("should respond with status 200 and an empty movie list", async () => {
+        const user = await createUser();
+        const session = await generateValidSession(user);
+        const token = session.token;
+        await generateEnrollment(user.id);
+
+        const response = await server.get("/movies").set("Authorization", `Bearer ${token}`);
+
+        expect(response.status).toBe(httpStatus.OK);
+        expect(response.body).toEqual(expect.objectContaining({ movies: [] }));
+      });
+
+
+      it("should respond with status 200 and a list with 20 movies", async () => {
+        const user = await createUser();
+        const session = await generateValidSession(user);
+        const token = session.token;
+        await generateEnrollment(user.id);
+
+        const response = await server.get("/movies").set("Authorization", `Bearer ${token}`);
+
+        expect(response.status).toBe(httpStatus.OK)
+        expect(response.body).toEqual(expect.objectContaining({ movies: [{}] })); //TODO: re-write test
+        ;
       });
     });
   });
