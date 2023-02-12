@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1675910804567" clover="3.2.0">
+  <project timestamp="1675910804567" name="All files">
+    <metrics statements="213" coveredstatements="99" conditionals="26" coveredconditionals="0" methods="35" coveredmethods="2" elements="274" coveredelements="101" complexity="0" loc="213" ncloc="213" packages="12" files="28" classes="28"/>
+    <package name="src">
+      <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="app.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/app.ts">
+        <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.config">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="database.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/config/database.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.errors">
+      <metrics statements="12" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <file name="duplicatedEmailError.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/errors/duplicatedEmailError.ts">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+      </file>
+      <file name="hasNoEnrollmentError.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/errors/hasNoEnrollmentError.ts">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+      </file>
+      <file name="invalidBirthdayDateError.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/errors/invalidBirthdayDateError.ts">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+      </file>
+      <file name="invalidEmailOrPasswordError.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/errors/invalidEmailOrPasswordError.ts">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+      </file>
+      <file name="invalidPasswordFormatError.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/errors/invalidPasswordFormatError.ts">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+      </file>
+      <file name="unauthorizedError.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/errors/unauthorizedError.ts">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.middleware">
+      <metrics statements="20" coveredstatements="5" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="authenticationMiddleware.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/middleware/authenticationMiddleware.ts">
+        <metrics statements="20" coveredstatements="5" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.modules.authentication">
+      <metrics statements="36" coveredstatements="15" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="authentication.controller.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/modules/authentication/authentication.controller.ts">
+        <metrics statements="15" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+      </file>
+      <file name="authentication.router.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/modules/authentication/authentication.router.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+      </file>
+      <file name="authentication.service.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/modules/authentication/authentication.service.ts">
+        <metrics statements="16" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="36" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.modules.enrollment">
+      <metrics statements="50" coveredstatements="16" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="enrollment.controller.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/modules/enrollment/enrollment.controller.ts">
+        <metrics statements="24" coveredstatements="6" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="43" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+      </file>
+      <file name="enrollment.router.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/modules/enrollment/enrollment.router.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+      </file>
+      <file name="enrollment.service.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/modules/enrollment/enrollment.service.ts">
+        <metrics statements="20" coveredstatements="4" conditionals="9" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="34" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.modules.users">
+      <metrics statements="36" coveredstatements="16" conditionals="5" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="user.router.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/modules/users/user.router.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+      </file>
+      <file name="users.controller.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/modules/users/users.controller.ts">
+        <metrics statements="17" coveredstatements="5" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+      </file>
+      <file name="users.service.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/modules/users/users.service.ts">
+        <metrics statements="14" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="26" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.repositories">
+      <metrics statements="15" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="authentication.repository.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/repositories/authentication.repository.ts">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+      </file>
+      <file name="enrollment.repository.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/repositories/enrollment.repository.ts">
+        <metrics statements="5" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/repositories/index.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+      </file>
+      <file name="users.repository.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/repositories/users.repository.ts">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.schemas">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="enrollment.schemas.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/schemas/enrollment.schemas.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+      </file>
+      <file name="user.schemas.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/schemas/user.schemas.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="cleanText.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/src/utils/cleanText.ts">
+        <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="tests.factories">
+      <metrics statements="17" coveredstatements="9" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="enrollment.factory.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/tests/factories/enrollment.factory.ts">
+        <metrics statements="12" coveredstatements="6" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="27" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+      </file>
+      <file name="users.factory.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/tests/factories/users.factory.ts">
+        <metrics statements="5" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="tests.helpers">
+      <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.ts" path="/home/wesley/Documents/projetos driven/movieon-projeto-final/movieon-back/tests/helpers/index.ts">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="28" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

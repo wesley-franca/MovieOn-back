@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int           @id @default(autoincrement())
+  email       String        @unique @db.VarChar(255)
+  password    String        @db.VarChar(255)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Session     Session[]
+  Enrollment  Enrollment?
+  MovieRating MovieRating[]
+  User        Connections[] @relation("user")
+  Match       Connections[] @relation("match")
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+model Enrollment {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  name      String   @db.VarChar(20)
+  lastName  String   @db.VarChar(50)
+  birthday  DateTime
+  instagram String   @unique @db.VarChar(30)
+  whatsapp  String   @unique @db.VarChar(30)
+  biography String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+model Movie {
+  id          Int           @id
+  title       String        
+  posterPath  String
+  releasedAt   String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  LikedMovies MovieRating[]
+}
+
+model MovieRating {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  movieId   Int
+  liked     Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Movie     Movie    @relation(fields: [movieId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+model Connections {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  matchedUser Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User     @relation("user", fields: [userId], references: [id])
+  Match       User     @relation("match", fields: [matchedUser], references: [id])
+}
