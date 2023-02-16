@@ -100,7 +100,7 @@ describe("POST /movies/:movieId", () => {
         });
 
         describe("when route param is a valid movie id", () => {
-          it("should respond with status 409 when movie is already rated by user", async () => {
+          it("should respond with status 409 when movie is already rated by the user", async () => {
             const user = await createUser();
             const session = await generateValidSession(user);
             const token = session.token;
@@ -127,7 +127,7 @@ describe("POST /movies/:movieId", () => {
             expect(response.status).toBe(httpStatus.CREATED);
           });
 
-          it("should create a new rated movie rating in db", async () => {
+          it("should create a new movie rating in db", async () => {
             const user = await createUser();
             const session = await generateValidSession(user);
             const token = session.token;
@@ -148,19 +148,6 @@ describe("POST /movies/:movieId", () => {
     });
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 describe("GET /movies", () => {
   it("should respond with status 401 when token is not given", async () => {
