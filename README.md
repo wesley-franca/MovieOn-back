@@ -60,3 +60,5 @@ This project is part of my portfolio. So, any feedback will be greatly appreciat
 
 E-mail: wesley.franca.dev@outlook.com
 Or contact me in [LinkedIn](https://www.linkedin.com/in/wesley-web-developer)
+ 
+ 
