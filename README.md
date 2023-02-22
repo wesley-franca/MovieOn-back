@@ -4,7 +4,7 @@
 
 **This project is still been developed**
 
-It is the **MovieOn** API made to support the front-end application with same name. 
+It is the **MovieOn** API made to support the front-end application with same name.  
 
 ## Tecnologies
 
